@@ -37,6 +37,7 @@ export default function Profile() {
   }, [file])
 
   const handleFileUpload = (file) => {
+    setFileUploadError(false); //if there was an error, for next turn, make it false
     const storage = getStorage(app)
     const fileName = new Date().getTime() + file.name
     const storageRef = ref(storage, fileName)
@@ -53,8 +54,6 @@ export default function Profile() {
         setFileUploadError(true)
       },
       () => {
-        setFileUploadError(false) //if there was an error, for next turn, make it false
-
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
           setFormData({ ...formData, avatar: downloadURL }),
         )
