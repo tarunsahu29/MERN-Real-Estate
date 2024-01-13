@@ -1,12 +1,18 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { MdLocationOn } from 'react-icons/md'
 
 // eslint-disable-next-line no-unused-vars
 export default function ListingItem({ listing }) {
+  const location = useLocation()
+  const isHome = location.pathname === '/'
   return (
-    <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[300px]">
+    <div
+      className={`bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full ${
+        isHome ? 'sm:w-[270px]' : 'sm:w-[300px]'
+      }`}
+    >
       <Link to={`/listing/${listing._id}`}>
         <img
           src={listing.imageUrls[0]}
